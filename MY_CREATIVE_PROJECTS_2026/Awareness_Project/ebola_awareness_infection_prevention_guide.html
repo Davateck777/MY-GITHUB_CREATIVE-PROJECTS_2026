@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebola Virus Disease (EVD) - Awareness & IPC Protocol Guide</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        medical: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            800: '#0c4a6e',
+                            900: '#0f172a',
+                        },
+                        caution: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                        },
+                        warning: {
+                            50: '#fffbebeb',
+                            100: '#fef3c7',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Explicit Sans-Serif Enforcement */
+        body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, div, a, li {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+        }
+
+        :root {
+            font-size: 16px;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; font-size: 12pt !important; }
+            .print-full-width { width: 100% !important; max-width: none !important; }
+            .print-break-inside-avoid { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-rose-500 selection:text-white">
+
+    <!-- Top Alert Banner -->
+    <div class="bg-gradient-to-r from-red-700 via-rose-600 to-red-700 text-white px-4 py-2.5 text-xs sm:text-sm font-medium no-print shadow-md">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center bg-white/20 rounded-full p-1 w-5 h-5 text-xs animate-pulse">
+                    <i class="fa-solid fa-triangle-exclamation">
+                </span>
+                <span><strong class="uppercase tracking-wide font-bold">Public Health Alert:</strong> Ebola creeps in again — vigilance saves lives. Know the signs & protocols.</span>
+            </div>
+            <button onclick="openModal('emergency-modal')" class="hidden sm:inline-flex items-center gap-1.5 bg-white text-rose-700 px-3 py-1 rounded-full text-xs font-bold hover:bg-slate-100 transition shadow-sm shrink-0">
+                <i class="fa-solid fa-phone-flip"></i> Emergency Checklist
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand / Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-600 to-red-700 text-white flex items-center justify-center shadow-md">
+                        <i class="fa-solid fa-shield-virus text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-slate-900 leading-tight">EVD Health Protection</h1>
+                        <p class="text-xs text-slate-500 font-medium">Infection Prevention & Control (IPC) Portal</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
+                    <a href="#about" class="hover:text-rose-600 transition">What is Ebola</a>
+                    <a href="#symptoms" class="hover:text-rose-600 transition">Signs & Symptoms</a>
+                    <a href="#ipc-measures" class="hover:text-rose-600 transition">IPC Measures</a>
+                    <a href="#suspected-protocol" class="hover:text-rose-600 transition">Suspected Protocol</a>
+                    <a href="#golden-rules" class="hover:text-rose-600 transition">Golden Rules</a>
+                </nav>
+
+                <!-- Actions & Accessibility Controls -->
+                <div class="flex items-center gap-3 no-print">
+                    <!-- Font Size Adjuster -->
+                    <div class="flex items-center bg-slate-100 rounded-lg p-1 border border-slate-200">
+                        <span class="text-[11px] font-bold text-slate-500 px-1.5 uppercase">Font</span>
+                        <button onclick="changeFontSize(-1)" title="Decrease font size" class="w-7 h-7 bg-white hover:bg-slate-200 text-slate-700 rounded-md font-bold text-xs flex items-center justify-center shadow-xs transition">
+                            A-
+                        </button>
+                        <button onclick="resetFontSize()" title="Reset font size" class="px-1.5 text-slate-500 hover:text-slate-800 font-bold text-xs">
+                            100%
+                        </button>
+                        <button onclick="changeFontSize(1)" title="Increase font size" class="w-7 h-7 bg-white hover:bg-slate-200 text-slate-700 rounded-md font-bold text-xs flex items-center justify-center shadow-xs transition">
+                            A+
+                        </button>
+                    </div>
+
+                    <button onclick="window.print()" class="hidden sm:inline-flex items-center gap-1.5 border border-slate-300 text-slate-700 hover:bg-slate-100 px-3.5 py-2 rounded-lg text-sm font-medium transition">
+                        <i class="fa-solid fa-print"></i> Print Guide
+                    </button>
+                    <button onclick="openModal('emergency-modal')" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md hover:shadow-lg transition flex items-center gap-2">
+                        <i class="fa-solid fa-circle-exclamation"></i> Action Steps
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section class="bg-slate-900 text-white relative overflow-hidden py-12 md:py-16">
+            <!-- Background Accent Visual -->
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f43f5e_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-rose-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 bg-rose-500/20 border border-rose-500/40 text-rose-300 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Urgent Health Advisory
+                        </div>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                            Now that <span class="text-rose-500">EBOLA</span> creeps in again, let us be vigilant.
+                        </h1>
+                        <p class="text-lg text-slate-300 font-light leading-relaxed">
+                            Knowledge and fast action are our primary defenses. It is crucial for everyone to know what Ebola is, recognize symptoms early, and practice effective Infection Prevention and Control (IPC).
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-2 no-print">
+                            <a href="#ipc-measures" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-rose-600/30 transition flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved"></i> Key IPC Measures
+                            </a>
+                            <a href="#symptoms" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-6 py-3 rounded-xl font-semibold transition flex items-center gap-2">
+                                <i class="fa-solid fa-list-check"></i> Symptom Checklist
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Key Definition Card -->
+                    <div class="md:col-span-5">
+                        <div id="about" class="bg-slate-800/90 border border-slate-700 backdrop-blur-md rounded-2xl p-6 shadow-2xl space-y-4">
+                            <div class="flex items-center gap-3 text-rose-400">
+                                <i class="fa-solid fa-circle-info text-2xl"></i>
+                                <h2 class="text-xl font-bold text-white">1. What Is Ebola?</h2>
+                            </div>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                <strong class="text-white">Ebola Virus Disease (EVD)</strong> is a severe, potentially fatal illness in humans. It progresses rapidly and requires strict medical protocol and isolation.
+                            </p>
+                            <div class="bg-rose-950/50 border border-rose-800/50 rounded-xl p-4 space-y-2">
+                                <p class="text-xs font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-route"></i> Mode of Transmission
+                                </p>
+                                <p class="text-xs text-rose-200 leading-normal">
+                                    Transmitted through <span class="underline decoration-rose-500 font-semibold text-white">direct contact</span> with blood, body fluids (vomit, diarrhea, sweat, saliva), or contaminated materials of an infected person or deceased person.
+                                </p>
+                            </div>
+                            <div class="text-xs text-slate-400 flex items-center justify-between border-t border-slate-700/60 pt-3">
+                                <span><i class="fa-solid fa-user-shield"></i> Protect Yourself</span>
+                                <span><i class="fa-solid fa-people-roof"></i> Protect Your Community</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Quick Navigation Bar -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20 no-print">
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-4">
+                <div class="flex flex-col md:flex-row items-center gap-4">
+                    <div class="relative w-full md:w-1/3">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="searchInput" onkeyup="filterContent()" placeholder="Search symptoms, IPC measures, protocols..." class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white transition">
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-medium w-full md:w-2/3 justify-start md:justify-end">
+                        <span class="text-slate-400 mr-1">Quick Links:</span>
+                        <button onclick="scrollToSection('symptoms')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg transition">Symptom Checker</button>
+                        <button onclick="scrollToSection('ipc-measures')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg transition">Hand Hygiene & PPE</button>
+                        <button onclick="scrollToSection('suspected-protocol')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg transition">Suspected Case Steps</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Signs and Symptoms -->
+        <section id="symptoms" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold uppercase tracking-widest text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200">Clinical Warning Signs</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-3">2. Common Signs and Symptoms</h2>
+                <p class="text-slate-600 text-sm mt-2">Onset of symptoms occurs after incubation. Early identification is vital to prevent transmission. Check any symptoms observed below for awareness.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 search-target-group">
+                <!-- Symptom Card 1 -->
+                <div class="searchable-item bg-white border border-slate-200 hover:border-rose-300 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 text-xl font-bold">
+                        <i class="fa-solid fa-temperature-arrow-up"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Sudden Onset Fever</h3>
+                        <p class="text-xs text-slate-500 mt-1">High body temperature starting abruptly without prior warning.</p>
+                    </div>
+                </div>
+
+                <!-- Symptom Card 2 -->
+                <div class="searchable-item bg-white border border-slate-200 hover:border-rose-300 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 text-xl font-bold">
+                        <i class="fa-solid fa-head-side-virus"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Severe Headache</h3>
+                        <p class="text-xs text-slate-500 mt-1">Intense head pain along with debilitating muscle aches.</p>
+                    </div>
+                </div>
+
+                <!-- Symptom Card 3 -->
+                <div class="searchable-item bg-white border border-slate-200 hover:border-rose-300 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0 text-xl font-bold">
+                        <i class="fa-solid fa-bed-pulse"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Weakness & Fatigue</h3>
+                        <p class="text-xs text-slate-500 mt-1">Profound physical exhaustion and body weakness.</p>
+                    </div>
+                </div>
+
+                <!-- Symptom Card 4 -->
+                <div class="searchable-item bg-white border border-slate-200 hover:border-rose-300 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 text-xl font-bold">
+                        <i class="fa-solid fa-virus-covid"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Sore Throat</h3>
+                        <p class="text-xs text-slate-500 mt-1">Throat discomfort, difficulty swallowing, or inflammation.</p>
+                    </div>
+                </div>
+
+                <!-- Symptom Card 5 -->
+                <div class="searchable-item bg-white border border-slate-200 hover:border-rose-300 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0 text-xl font-bold">
+                        <i class="fa-solid fa-toilet"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Vomiting & Diarrhoea</h3>
+                        <p class="text-xs text-slate-500 mt-1">Gastrointestinal distress leading to fluid loss.</p>
+                    </div>
+                </div>
+
+                <!-- Symptom Card 6 -->
+                <div class="searchable-item bg-white border border-slate-200 hover:border-rose-300 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 text-xl font-bold">
+                        <i class="fa-solid fa-capsules"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base">Abdominal Pain</h3>
+                        <p class="text-xs text-slate-500 mt-1">Severe stomach cramps and persistent abdominal discomfort.</p>
+                    </div>
+                </div>
+
+                <!-- Symptom Card 7 (High Danger) -->
+                <div class="searchable-item sm:col-span-2 bg-gradient-to-r from-rose-50 to-red-50 border border-rose-200 rounded-2xl p-5 shadow-sm flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-rose-600 text-white flex items-center justify-center shrink-0 text-xl font-bold shadow-md">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-bold text-rose-900 text-base">Unexplained Bleeding</h3>
+                            <span class="bg-rose-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Critical Sign</span>
+                        </div>
+                        <p class="text-xs text-rose-800 mt-1">In some severe cases, unexplained bruising, bleeding gums, nosebleeds, or internal gastrointestinal bleeding may occur.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Self Assessment Interactive Check Box -->
+            <div class="mt-8 bg-slate-900 text-white rounded-2xl p-6 no-print">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-bold text-base flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-rose-400"></i> Interactive Self-Assessment Checklist
+                        </h4>
+                        <p class="text-xs text-slate-300 mt-1">Select symptoms if monitoring yourself or someone else. If fever + 2 symptoms present, seek immediate isolation.</p>
+                    </div>
+                    <button onclick="resetSymptomCheck()" class="text-xs text-slate-400 hover:text-white underline self-start md:self-auto">Reset Checklist</button>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+                    <label class="flex items-center gap-2 text-xs text-slate-200 bg-slate-800 p-2.5 rounded-lg border border-slate-700 cursor-pointer hover:bg-slate-750">
+                        <input type="checkbox" onchange="updateSymptomCounter()" class="symptom-cb rounded border-slate-600 text-rose-600 focus:ring-rose-500"> Fever
+                    </label>
+                    <label class="flex items-center gap-2 text-xs text-slate-200 bg-slate-800 p-2.5 rounded-lg border border-slate-700 cursor-pointer hover:bg-slate-750">
+                        <input type="checkbox" onchange="updateSymptomCounter()" class="symptom-cb rounded border-slate-600 text-rose-600 focus:ring-rose-500"> Headache
+                    </label>
+                    <label class="flex items-center gap-2 text-xs text-slate-200 bg-slate-800 p-2.5 rounded-lg border border-slate-700 cursor-pointer hover:bg-slate-750">
+                        <input type="checkbox" onchange="updateSymptomCounter()" class="symptom-cb rounded border-slate-600 text-rose-600 focus:ring-rose-500"> Fatigue
+                    </label>
+                    <label class="flex items-center gap-2 text-xs text-slate-200 bg-slate-800 p-2.5 rounded-lg border border-slate-700 cursor-pointer hover:bg-slate-750">
+                        <input type="checkbox" onchange="updateSymptomCounter()" class="symptom-cb rounded border-slate-600 text-rose-600 focus:ring-rose-500"> Vomiting/Diarrhoea
+                    </label>
+                </div>
+
+                <div id="symptom-alert-box" class="hidden mt-4 bg-rose-600/30 border border-rose-500 text-rose-200 p-3 rounded-xl text-xs flex items-center justify-between">
+                    <span id="symptom-alert-text">Multiple symptoms selected. Prepare for isolation & health contact.</span>
+                    <button onclick="openModal('emergency-modal')" class="bg-rose-600 text-white px-3 py-1 rounded font-bold text-xs hover:bg-rose-500 transition">View Action Steps</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Key IPC Measures (Tabbed & Visual Cards) -->
+        <section id="ipc-measures" class="py-16 bg-slate-100 border-y border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-sky-700 bg-sky-100 px-3 py-1 rounded-full border border-sky-200">Standard Operating Protocol</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-3">3. Key Infection Prevention & Control (IPC) Measures</h2>
+                    <p class="text-slate-600 text-sm mt-2">Strict adherence to IPC protocols prevents healthcare worker and community transmission.</p>
+                </div>
+
+                <!-- Grid of IPC Cards (Print-friendly layout) -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- IPC A: Hand Hygiene -->
+                    <div class="searchable-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition print-break-inside-avoid">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold">
+                                    A
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-lg">Hand Hygiene</h3>
+                            </div>
+                            <ul class="space-y-3 text-xs text-slate-600">
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-soap text-sky-600 mt-0.5"></i>
+                                    <span>Wash hands thoroughly with soap and running water, or use an appropriate alcohol-based hand rub when hands are not visibly soiled.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-hand-holding-hand text-sky-600 mt-0.5"></i>
+                                    <span>Perform hand hygiene <strong>before and after</strong> patient contact and immediately after removing medical gloves.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-semibold">
+                            <span>IPC SUBSECTION A</span>
+                            <span class="text-sky-600">Essential Standard</span>
+                        </div>
+                    </div>
+
+                    <!-- IPC B: Personal Protective Equipment -->
+                    <div class="searchable-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition print-break-inside-avoid">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                                    B
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-lg">Personal Protective Equipment</h3>
+                            </div>
+                            <ul class="space-y-3 text-xs text-slate-600">
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-user-shield text-purple-600 mt-0.5"></i>
+                                    <span>Use appropriate PPE strictly based on the evaluated level of exposure risk.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-mask-face text-purple-600 mt-0.5"></i>
+                                    <span>PPE includes: <strong>gloves, fluid-resistant gowns/coveralls, masks, eye protection (goggles/face shield), and appropriate footwear.</strong></span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-graduation-cap text-purple-600 mt-0.5"></i>
+                                    <span>Trained personnel must rigorously follow strict donning and doffing (putting on/removing) procedures.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-semibold">
+                            <span>IPC SUBSECTION B</span>
+                            <span class="text-purple-600">Strict Safety Barrier</span>
+                        </div>
+                    </div>
+
+                    <!-- IPC C: Isolation and Patient Care -->
+                    <div class="searchable-item bg-white rounded-2xl p-6 shadow-sm border border-rose-200 bg-rose-50/30 flex flex-col justify-between hover:shadow-md transition print-break-inside-avoid">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold">
+                                    C
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-lg">Isolation & Patient Care</h3>
+                            </div>
+                            <ul class="space-y-3 text-xs text-slate-700">
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-door-closed text-rose-600 mt-0.5"></i>
+                                    <span><strong>Immediately isolate</strong> suspected cases in a designated, segregated area.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-user-lock text-rose-600 mt-0.5"></i>
+                                    <span>Limit patient contact exclusively to essential, fully trained personnel.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-ban text-rose-600 mt-0.5"></i>
+                                    <span>Avoid all direct contact with blood, vomit, stool, and other body fluids.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-bullhorn text-rose-600 mt-0.5"></i>
+                                    <span>Notify appropriate public health authorities immediately.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-rose-100 flex items-center justify-between text-[11px] font-semibold">
+                            <span class="text-slate-400">IPC SUBSECTION C</span>
+                            <span class="text-rose-600">Immediate Action</span>
+                        </div>
+                    </div>
+
+                    <!-- IPC D: Environmental Cleaning & Disinfection -->
+                    <div class="searchable-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition print-break-inside-avoid">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                                    D
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-lg">Environmental Cleaning</h3>
+                            </div>
+                            <ul class="space-y-3 text-xs text-slate-600">
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-pump-soap text-emerald-600 mt-0.5"></i>
+                                    <span>Clean and disinfect contaminated surfaces using approved hospital-grade products and protocols.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-box-tissue text-emerald-600 mt-0.5"></i>
+                                    <span>Handle contaminated linen, medical equipment, and waste safely according to IPC guidelines.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-hand-shake-slash text-emerald-600 mt-0.5"></i>
+                                    <span>Avoid unnecessary handling of contaminated materials.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-semibold">
+                            <span>IPC SUBSECTION D</span>
+                            <span class="text-emerald-600">Sanitation Protocol</span>
+                        </div>
+                    </div>
+
+                    <!-- IPC E: Safe Handling of Sharps and Waste -->
+                    <div class="searchable-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition print-break-inside-avoid">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                                    E
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-lg">Sharps & Waste Safety</h3>
+                            </div>
+                            <ul class="space-y-3 text-xs text-slate-600">
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-syringe text-amber-600 mt-0.5"></i>
+                                    <span><strong>Never recap</strong> used needles under any circumstance.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-box-archive text-amber-600 mt-0.5"></i>
+                                    <span>Dispose of sharps immediately into rigid, puncture-resistant containers.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-trash-can-arrow-up text-amber-600 mt-0.5"></i>
+                                    <span>Segregate and dispose of biohazardous waste according to approved safety protocols.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-semibold">
+                            <span>IPC SUBSECTION E</span>
+                            <span class="text-amber-600">Biohazard Safety</span>
+                        </div>
+                    </div>
+
+                    <!-- IPC F: Safe and Dignified Burial -->
+                    <div class="searchable-item bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition print-break-inside-avoid">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+                                    F
+                                </div>
+                                <h3 class="font-bold text-slate-900 text-lg">Safe & Dignified Burial</h3>
+                            </div>
+                            <ul class="space-y-3 text-xs text-slate-600">
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-users-gear text-indigo-600 mt-0.5"></i>
+                                    <span><strong>Only trained and authorized burial teams</strong> should handle bodies of individuals who died from suspected or confirmed Ebola.</span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-ribbon text-indigo-600 mt-0.5"></i>
+                                    <span>Strictly follow approved safe and dignified burial procedures to honor deceased while stopping community transmission.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-semibold">
+                            <span>IPC SUBSECTION F</span>
+                            <span class="text-indigo-600">Community Defense</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: What to Do If Ebola Is Suspected (Step-by-step Flow) -->
+        <section id="suspected-protocol" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-extrabold uppercase tracking-widest text-rose-600 bg-rose-50 px-3 py-1 rounded-full border border-rose-200">Emergency Protocol</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-3">4. What to Do If Ebola Is Suspected</h2>
+                <p class="text-slate-600 text-sm mt-2">Follow this mandatory 5-step response sequence immediately upon identifying potential symptoms.</p>
+            </div>
+
+            <div class="grid md:grid-cols-5 gap-4 relative">
+                <!-- Step 1 -->
+                <div class="bg-white border-2 border-slate-200 hover:border-rose-500 rounded-2xl p-5 relative transition shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-sm mb-3">
+                            1
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mb-2">Avoid Fluids Contact</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Avoid direct contact with the suspected patient's body fluids, saliva, blood, vomit, or soiled bedding.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-100 text-[10px] font-bold text-rose-600 uppercase">
+                        Step 1: Prevention
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white border-2 border-slate-200 hover:border-rose-500 rounded-2xl p-5 relative transition shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-sm mb-3">
+                            2
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mb-2">Immediate Separation</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Provide immediate separation/isolation in a designated separate room or isolation area.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-100 text-[10px] font-bold text-rose-600 uppercase">
+                        Step 2: Isolation
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white border-2 border-slate-200 hover:border-rose-500 rounded-2xl p-5 relative transition shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-sm mb-3">
+                            3
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mb-2">Alert Authorities</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Alert the designated IPC lead and public health authorities immediately via emergency numbers.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-100 text-[10px] font-bold text-rose-600 uppercase">
+                        Step 3: Notification
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white border-2 border-slate-200 hover:border-rose-500 rounded-2xl p-5 relative transition shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-sm mb-3">
+                            4
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mb-2">Safe Testing & Referral</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Arrange safe assessment, testing, and transport/referral through authorized health services.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-100 text-[10px] font-bold text-rose-600 uppercase">
+                        Step 4: Care & Test
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-white border-2 border-slate-200 hover:border-rose-500 rounded-2xl p-5 relative transition shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-rose-600 text-white font-extrabold flex items-center justify-center text-sm mb-3">
+                            5
+                        </div>
+                        <h3 class="font-bold text-slate-900 text-sm mb-2">Record Exposures</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Record and assess potential exposures for appropriate follow-up, contact tracing, and monitoring.</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-slate-100 text-[10px] font-bold text-rose-600 uppercase">
+                        Step 5: Contact Tracing
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Remember / Golden Rules Banner -->
+        <section id="golden-rules" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-red-700 via-rose-600 to-red-800 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-black">
+                    EVD
+                </div>
+
+                <div class="relative z-10 text-center max-w-3xl mx-auto space-y-6">
+                    <span class="bg-white/20 text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest inline-block">5. Core Imperative</span>
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight">REMEMBER THE GOLDEN RULES</h2>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center pt-4">
+                        <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                            <i class="fa-solid fa-eye text-2xl mb-2 text-rose-200"></i>
+                            <h3 class="font-black text-sm tracking-wide">RECOGNISE EARLY</h3>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                            <i class="fa-solid fa-shield-halved text-2xl mb-2 text-rose-200"></i>
+                            <h3 class="font-black text-sm tracking-wide">ISOLATE SAFELY</h3>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                            <i class="fa-solid fa-phone-volume text-2xl mb-2 text-rose-200"></i>
+                            <h3 class="font-black text-sm tracking-wide">REPORT IMMEDIATELY</h3>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                            <i class="fa-solid fa-people-group text-2xl mb-2 text-rose-200"></i>
+                            <h3 class="font-black text-sm tracking-wide">PROTECT EVERYONE</h3>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm sm:text-base font-bold">
+                        <span class="bg-white text-rose-700 px-5 py-2.5 rounded-xl shadow-md">Protect Yourself.</span>
+                        <span class="bg-white text-rose-700 px-5 py-2.5 rounded-xl shadow-md">Protect Your Community.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 text-xs no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-rose-600 text-white flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <span class="font-bold text-slate-200 text-sm">Public Health Guidance Portal</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#about" class="hover:text-white transition">About EVD</a>
+                    <a href="#symptoms" class="hover:text-white transition">Symptoms</a>
+                    <a href="#ipc-measures" class="hover:text-white transition">IPC Guidelines</a>
+                    <a href="#suspected-protocol" class="hover:text-white transition">Suspected Case Steps</a>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-6 text-center text-slate-500">
+                <p>Caution Notice: This webpage contains official Infection Prevention and Control (IPC) protocol data for public awareness and educational purposes. Always consult local public health authorities and medical professionals for official emergency directives.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Emergency Checklist Modal -->
+    <div id="emergency-modal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 space-y-5 relative">
+            <button onclick="closeModal('emergency-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="flex items-center gap-3 text-rose-600">
+                <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div>
+                    <h3 class="font-extrabold text-slate-900 text-lg">Suspected Ebola Case Action Plan</h3>
+                    <p class="text-xs text-slate-500">Follow these 5 immediate steps</p>
+                </div>
+            </div>
+
+            <ol class="space-y-3 text-xs text-slate-700">
+                <li class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-0.5">1. Avoid Direct Contact</strong>
+                    Do not touch blood, vomit, stool, or other body fluids of the individual.
+                </li>
+                <li class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-0.5">2. Provide Immediate Isolation</strong>
+                    Move the person safely to a separate, private isolation room.
+                </li>
+                <li class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-0.5">3. Alert IPC Lead & Health Authorities</strong>
+                    Immediately notify public health services and IPC leads.
+                </li>
+                <li class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-0.5">4. Safe Assessment & Referral</strong>
+                    Allow only trained personnel to conduct testing and transport.
+                </li>
+                <li class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <strong class="text-slate-900 block mb-0.5">5. Contact Tracing Log</strong>
+                    List all individuals who came into contact with the patient.
+                </li>
+            </ol>
+
+            <div class="pt-2 flex gap-3">
+                <button onclick="window.print()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 rounded-xl text-xs transition">
+                    <i class="fa-solid fa-print"></i> Print Protocol
+                </button>
+                <button onclick="closeModal('emergency-modal')" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                    Got It
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Font Size Adjuster Logic
+        let currentFontSizeLevel = 0;
+        const fontSizes = [14, 16, 18, 20]; // in px
+
+        function changeFontSize(delta) {
+            currentFontSizeLevel = Math.max(0, Math.min(fontSizes.length - 1, currentFontSizeLevel + delta));
+            document.documentElement.style.fontSize = fontSizes[currentFontSizeLevel] + 'px';
+        }
+
+        function resetFontSize() {
+            currentFontSizeLevel = 1; // default 16px
+            document.documentElement.style.fontSize = fontSizes[currentFontSizeLevel] + 'px';
+        }
+
+        // Modal functions
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        // Smooth Scroll
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Symptom Assessment Counter & Alert Trigger
+        function updateSymptomCounter() {
+            const checkboxes = document.querySelectorAll('.symptom-cb');
+            const alertBox = document.getElementById('symptom-alert-box');
+            const alertText = document.getElementById('symptom-alert-text');
+            
+            let count = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) count++;
+            });
+
+            if (count >= 2) {
+                alertBox.classList.remove('hidden');
+                alertText.textContent = `Warning: ${count} key symptoms selected. Isolate patient safely and notify IPC lead immediately.`;
+            } else if (count === 1) {
+                alertBox.classList.remove('hidden');
+                alertText.textContent = `1 symptom checked. Monitor closely and enforce strict hand hygiene.`;
+            } else {
+                alertBox.classList.add('hidden');
+            }
+        }
+
+        function resetSymptomCheck() {
+            const checkboxes = document.querySelectorAll('.symptom-cb');
+            checkboxes.forEach(cb => cb.checked = false);
+            updateSymptomCounter();
+        }
+
+        // Search Filter Logic
+        function filterContent() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.searchable-item');
+
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(input)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
